@@ -6,6 +6,10 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        UserInteract userInteract = new UserInteract();
+        ItemService itemService = new ItemService();
+        PriceService priceService = new PriceService();
+        OrderService orderService = new OrderService();
 
         /*
         * The idea between the Arrays creation is to the items and prices represents
@@ -32,20 +36,32 @@ public class Main {
         int[][] orders = new int[0][0];
 
         while (true){
-            int selectedOption = showMenu(scanner);
+            int selectedOption = userInteract.showMenu(scanner);
             if(selectedOption == 0) break;
+            switch (selectedOption) {
+                case 1 -> {
+                    String itemName = userInteract.waitForUserInformAName(scanner);
+                    items = itemService.addItemToItems(items, itemName);
+                    prices = priceService.increaseArray(prices);
+                }
+                case 2 -> {
+                    userInteract.printProducts(items, prices);
+                    int itemId = userInteract.waitForItemID(scanner);
+                    double itemPrice = userInteract.waitForItemPrice(scanner);
+                    priceService.priceAnItem(prices, itemId, itemPrice);
+                }
+                case 3 -> {
+                    userInteract.printProducts(items,prices);
+                }
+                case 4 -> {
+                    orders = orderService.increaseOrderArray(orders);
+                    userInteract.newOrderInfo(orders);
+                }
+                case 5 -> {
+
+                }
+            }
         }
     }
 
-    private static int showMenu(Scanner scanner) {
-        System.out.println("========== Menu ===========\n" +
-                "1 - Add Item" +
-                "2 - Price Item" +
-                "3 - List Items" +
-                "4 - New Order" +
-                "5 - Order Item" +
-                "6 - List Orders" +
-                "7 - Finish Order");
-        return scanner.nextInt();
-    }
 }
