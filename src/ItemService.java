@@ -13,16 +13,10 @@ public class ItemService {
     * without create another memory pointer
     * */
 
-    public String[] addItemToItems(String[] items, Scanner scanner){
-        String itemName = waitForUserInformAName(scanner);
+    public String[] addItemToItems(String[] items, String itemName){
         String[] expandedArray = copyArray(items);
         addItemToArray(itemName, expandedArray);
         return expandedArray;
-    }
-
-    private String waitForUserInformAName(Scanner scanner) {
-        System.out.println("Inform the item name: ");
-        return scanner.nextLine();
     }
 
     private void addItemToArray(String itemName, String[] expandedArray) {
