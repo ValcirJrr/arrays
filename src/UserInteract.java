@@ -6,6 +6,7 @@ public class UserInteract {
     final String PRINT_PRODUCT = "%d - %s R$%.2f\n";
     final String REQUEST_ITEM_NAME = "Informe o nome do produto: ";
     final String REQUEST_ITEM_ID = "Informe o ID do item: ";
+    final String REQUEST_ORDER_ID = "Informe o ID do pedido: ";
     final String REQUEST_ITEM_PRICE = "Informe o valor do Item";
     final String NEW_ORDER_INFO = "Pedido %d adicionado\n";
 
@@ -46,7 +47,23 @@ public class UserInteract {
         return scanner.nextDouble();
     }
 
+    public int waitForOrderID(Scanner scanner){
+        System.out.println(REQUEST_ORDER_ID);
+        return scanner.nextInt();
+    }
+
     public void newOrderInfo(int[][] orders){
         System.out.printf(NEW_ORDER_INFO, orders.length);
+    }
+
+    public  void listOrders(String[] items, double[] prices, int[][] orders) {
+        for (int i = 0; i < orders.length; i++) {
+            System.out.println("Pedido " + i);
+            for (int j = 0; j < orders[i].length; j++) {
+                if(orders[i][j] != 0)
+                    System.out.println(items[orders[i][j]] + " - R$" + prices[orders[i][j]]);
+            }
+            System.out.println("========");
+        }
     }
 }
