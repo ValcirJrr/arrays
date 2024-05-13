@@ -58,10 +58,17 @@ public class Main {
                     userInteract.newOrderInfo(orders);
                 }
                 case 5 -> {
-
+                    int itemId = userInteract.waitForItemID(scanner);
+                    int orderId = userInteract.waitForOrderID(scanner);
+                    orders = orderService.addItemToOrder(orders, itemId, orderId);
+                }
+                case 6 -> {
+                    userInteract.listOrders(items, prices, orders);
                 }
             }
         }
     }
+
+
 
 }
