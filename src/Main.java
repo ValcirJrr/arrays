@@ -65,10 +65,14 @@ public class Main {
                 case 6 -> {
                     userInteract.listOrders(items, prices, orders);
                 }
+                case 7 -> {
+                    int orderID = userInteract.waitForOrderIDFromOrderList(scanner, orders);
+                    userInteract.printOrderFromOrderList(orderID, orders, items, prices);
+                    boolean confirm = userInteract.confirmOrderClose(scanner);
+                    if(confirm) orders = orderService.payOrder(orders, orderID);
+                }
             }
         }
     }
-
-
 
 }

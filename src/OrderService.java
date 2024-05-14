@@ -30,12 +30,26 @@ public class OrderService {
         return orders;
     }
 
+    public int[][] payOrder(int[][] orders, int orderPosition){
+        int[][] ordersToReturs = new int[orders.length-1][orders[orderPosition].length];
+        for (int i = 0; i < orders.length; i++) {
+            int orderToCopyPosition = i;
+            if(i == orderPosition) continue;
+            else if(i > orderPosition)  orderToCopyPosition--;
+            for (int j = 0; j < orders[i].length; j++) {
+                ordersToReturs[orderToCopyPosition][j] = orders[i][j];
+            }
+        }
+        return ordersToReturs;
+    }
+
+
     private static boolean hasNoMoreBlankSpaces(int i, int[] orders) {
         return i == (orders.length - 1);
     }
 
-    private void addItemToIPosition(int itemPosition, int i, int[] orders) {
-        orders[i] = itemPosition;
+    private void addItemToIPosition(int itemPosition, int position, int[] orders) {
+        orders[position] = itemPosition;
     }
 
     private boolean hasSpaceWithNoCodeItem(int i, int[] orders) {
@@ -51,8 +65,8 @@ public class OrderService {
     }
 
     private void copyPreviousToNewArray(int[][] orders, int[][] newOrders) {
-        for (int j = 0; j < newOrders.length; j++) {
-            for (int k = 0; k < newOrders[j].length; k++) {
+        for (int j = 0; j < orders.length; j++) {
+            for (int k = 0; k < orders[j].length; k++) {
                 addItemToIPosition(orders[j][k], k, newOrders[j]);
             }
         }
